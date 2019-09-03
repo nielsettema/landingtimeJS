@@ -18,13 +18,39 @@ function showTime() {
   const amPm = hour >= 12 ? 'PM' : 'AM';
 
   // 12hr Format
-  hour = hour % 12 || 12;
+  // hour = hour % 24 || 12; 
 
 //Output the time
-time.innerHTML = `${hour}<span>:</span>${min}<span>:</span>${sec}`;
+time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
 
 setTimeout(showTime, 1000);
 }
 
+// Add Zeros
+function addZero(n) {
+  return (parseInt(n, 10) < 10 ? '0' : '') + n;
+}
+
+// Background and Greeting
+function setBgGreet () {
+  let today = new Date(),
+    hour = today.getHours();
+
+  if(hour < 12) {
+    //  Ochtend
+    document.body.style.backgroundImage = "url('../img/ochtend.jpg')";
+    greeting.textContent = 'Goeiemorgen';
+      } else if(hour < 18) {
+    //  Middag
+    document.body.style.backgroundImage ="url('../img/ochtend2.jpg')";
+    greeting.textContent = 'Goeiemiddag';
+    } else {
+    document.body.style.backgroundImage = "url('../img/avond.jpg')";
+    greeting.textContent = 'Goedenavond';
+    }
+    // Avond
+}
+
 // Run
 showTime ();
+setBgGreet();
